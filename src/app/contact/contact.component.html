@@ -1,7 +1,7 @@
 <div style="text-align: center;">
 <form (ngSubmit)="processForm()">
 
-  <!-- name -->
+  Your name:
   <div>
     <label>
       <input type="text" name="name" class="form-control" placeholder="Your Name" [(ngModel)]="name" required minlength="3" #nameInput="ngModel">
@@ -11,7 +11,7 @@
     </div>
   </div>
 
-  <!-- email -->
+  Your email:
   <div>
     <label>
       <input type="email" name="email" class="form-control" placeholder="Your Email" [(ngModel)]="email" required email #emailInput="ngModel">
@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <!-- message -->
+  Your message:
   <div>
     <label>
       <textarea name="message" class="form-control" placeholder="What's on your mind?" [(ngModel)]="message" required #messageInput="ngModel"></textarea>
@@ -31,8 +31,9 @@
     </div>
   </div>
   <div >
-  <button type="submit" class="btn btn-primary" [disabled]="nameInput.invalid || emailInput.invalid || messageInput.invalid">Submit</button>
+  <button type="submit" value="Submit" class="btn btn-primary" [disabled]="nameInput.invalid || emailInput.invalid || messageInput.invalid">Submit</button>
   </div>
 
 </form>
 </div>
+<router-outlet></router-outlet>

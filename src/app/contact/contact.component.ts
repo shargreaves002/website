@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { SendMailServiceService } from '../services/send-mail-service.service';
+import { Subscription } from 'rxjs';
+import {FormGroup, FormControl, FormBuilder, Validators, FormArray} from '@angular/forms';
 
 @Component({
   selector: 'app-contact',

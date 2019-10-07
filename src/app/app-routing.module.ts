@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { paths } from './app-paths';
-import {PathResolveService} from './path-resolve.service';
+import {PathResolveService} from './services/path-resolve.service';
 import {NotFoundComponent} from './not-found/not-found.component';
 
 
