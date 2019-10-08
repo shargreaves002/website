@@ -4,8 +4,10 @@ const nodemailer = require('nodemailer');
 const app = express();
 const projectName = "website";
 const bodyParser = require('body-parser');
-const GMAIL_USER = process.env.GMAIL_USER;
-const GMAIL_PASS = process.env.GMAIL_PASS;
+// const GMAIL_USER = process.env.GMAIL_USER;
+// const GMAIL_PASS = process.env.GMAIL_PASS;
+const GMAIL_USER = 'fury157@gmail.com';
+const GMAIL_PASS = 'momlovesme';
 
 app.use(express.static('dist/' + projectName));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -28,7 +30,7 @@ app.listen(app.get('port'), function () {
 });
 
 // POST route from contact form
-app.post('/src/app/contact', (req, res) => {
+app.post('/contact', (req, res) => {
   // Instantiate the SMTP server
   const smtpTrans = nodemailer.createTransport({
     host: 'smtp.gmail.com',
@@ -44,7 +46,7 @@ app.post('/src/app/contact', (req, res) => {
   const mailOpts = {
     from: 'Your sender info here', // This is ignored by Gmail
     to: GMAIL_USER,
-    subject: 'New message from contact form at tylerkrys.ca',
+    subject: 'New message from website',
     text: `${req.body.name} (${req.body.email}) says: ${req.body.message}`
   };
 
