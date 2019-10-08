@@ -29,7 +29,6 @@ app.listen(app.get('port'), function () {
 
 // POST route from contact form
 app.post('/src/app/contact', (req, res) => {
-
   // Instantiate the SMTP server
   const smtpTrans = nodemailer.createTransport({
     host: 'smtp.gmail.com',
