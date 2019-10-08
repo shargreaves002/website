@@ -1,9 +1,14 @@
+require('dotenv').config();
 const express = require('express');
+const nodemailer = require('nodemailer');
 const app = express();
-// this is our project folder name
 const projectName = "website";
+const bodyParser = require('body-parser');
+const GMAIL_USER = process.env.GMAIL_USER;
+const GMAIL_PASS = process.env.GMAIL_PASS;
 
 app.use(express.static('dist/' + projectName));
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -20,4 +25,37 @@ app.get('*',function (req, res) {
 
 app.listen(app.get('port'), function () {
   console.log("Express server listening on port " + app.get('port'));
+});
+
+// POST route from contact form
+app.post('/src/app/contact', (req, res) => {
+
+  // Instantiate the SMTP server
+  const smtpTrans = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+      user: GMAIL_USER,
+      pass: GMAIL_PASS
+    }
+  });
+
+  // Specify what the email will look like
+  const mailOpts = {
+    from: 'Your sender info here', // This is ignored by Gmail
+    to: GMAIL_USER,
+    subject: 'New message from contact form at tylerkrys.ca',
+    text: `${req.body.name} (${req.body.email}) says: ${req.body.message}`
+  };
+
+  // Attempt to send the email
+  smtpTrans.sendMail(mailOpts, (error) => {
+    if (error) {
+      res.render('src/app/contact-failure') // Show a page indicating failure
+    }
+    else {
+      res.render('src/app/contact-success') // Show a page indicating success
+    }
+  })
 });
