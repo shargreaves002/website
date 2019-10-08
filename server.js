@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 // const GMAIL_USER = 'fury157@gmail.com';
 // const GMAIL_PASS = 'momlovesme';
 
+app.use(bodyParser.json());
 app.use(express.static('dist/' + projectName));
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -30,7 +31,7 @@ app.listen(app.get('port'), function () {
 });
 
 // POST route from contact form
-app.post('/src/app/contact/contact.component', (req, res) => {
+app.post('/contact', (req, res) => {
   // Instantiate the SMTP server
   const smtpTrans = nodemailer.createTransport({
     host: 'smtp.gmail.com',
