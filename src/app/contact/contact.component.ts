@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { SendMailServiceService } from '../services/send-mail-service.service';
-import { Subscription } from 'rxjs';
+import {from, Subscription} from 'rxjs';
 import {FormGroup, FormControl, FormBuilder, Validators, FormArray} from '@angular/forms';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+
+import axios from 'axios';
+import { AxiosInstance } from 'axios';
 
 @Component({
   selector: 'app-contact',
@@ -12,14 +16,24 @@ export class ContactComponent implements OnInit {
   name: string;
   email: string;
   message: string;
-  constructor() { }
 
   ngOnInit() {
   }
 
+  constructor(private http: HttpClient) {}
+
   // TODO: make a back end to email this data to me
-  processForm() {
-    const allInfo = `My name is ${this.name}. My email is ${this.email}. My message is ${this.message}`;
-    alert(allInfo);
+  processForm = async (e) => {
+    e.preventDefault();
+    await axios.post('/contact', {
+      firstName: 'Fred',
+      lastName: 'Flintstone'
+    })
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 }
