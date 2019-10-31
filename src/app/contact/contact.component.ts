@@ -24,8 +24,9 @@ export class ContactComponent implements OnInit {
 
   // TODO: make a back end to email this data to me
   processForm = async () => {
+    console.log('post request sending');
     // e.preventDefault();
-    await axios.post('https://fierce-sands-07111.herokuapp.com/contact', {
+    await axios.post('/contact', {
       firstName: 'Fred',
       lastName: 'Flintstone'
     })
@@ -35,5 +36,7 @@ export class ContactComponent implements OnInit {
       .catch(error => {
         console.log(error);
       });
+
+    console.log('post request sent');
   }
 }

@@ -68,8 +68,9 @@ app.post('/contact', (req, res) => {
   })
 });*/
 
-app.post('https://fierce-sands-07111.herokuapp.com/contact', (req, res) => {
+app.post('/contact', (req, res) => {
   // create reusable transporter object using the default SMTP transport
+  console.log("post request received");
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
     port: 587,
