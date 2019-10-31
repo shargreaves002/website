@@ -11,11 +11,17 @@ const bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
 app.use(express.static('dist/' + projectName));
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({extended: false}));
 
-app.all('*', function (req, res, next) {
+/*app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});*/
+
+app.use((request, response, next) => {
+  response.header("Access-Control-Allow-Origin", "*");
+  response.header("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
 
@@ -23,13 +29,14 @@ app.set('port', process.env.PORT || 5000);
 
 app.get('*',function (req, res) {
   // this tells the server to redirect all url calls to the index where our angular router will do the work
-  res.sendFile(__dirname + '/dist/' + projectName + 'index.html')
+  res.sendFile(__dirname + '/src/index.html');
+  console.log("Get request made");
 });
 
 app.listen(app.get('port'), function () {
   console.log("Express server listening on port " + app.get('port'));
 });
-
+/*
 // POST route from contact form
 app.post('/contact', (req, res) => {
   // Instantiate the SMTP server
@@ -60,4 +67,52 @@ app.post('/contact', (req, res) => {
       res.render('src/app/contact-success') // Show a page indicating success
     }
   })
+});*/
+
+app.post('/contact', (req, res) => {
+  // create reusable transporter object using the default SMTP transport
+  let transporter = nodemailer.createTransport({
+    host: "smtp.gmail.com",
+    port: 587,
+    auth: {
+      user: 'fury157@gmail.com',
+      pass: 'momlovesme'
+    },
+    tls: {
+      rejectUnauthorized: false
+    }
+  });
+
+  // setup email data with unicode symbols
+  let mailOptions = {
+    from: 'Someone@test.com', // sender address
+    to: 'sarahhargreaves10@gmail.com', // list of receivers
+    subject: 'A Postcard For You!', // Subject line
+    text: 'Postcard', // plain text body
+    html: '<b>From my app</b>' // html body
+  };
+
+  // send mail with defined transport object
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      res.render('src/app/contact-failure') // Show a page indicating failure
+    }
+    else {
+      res.render('src/app/contact-success') // Show a page indicating success
+    }
+  });
 });
+
+handleSubmit = async(e) => {
+  e.preventDefault();
+  await axios.post('/contact', {
+    firstName: 'Fred',
+    lastName: 'Flintstone'
+  })
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+};

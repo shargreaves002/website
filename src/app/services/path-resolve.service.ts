@@ -47,8 +47,7 @@ export class PathResolveService implements Resolve<string | null> {
   /**
    * Calculate the levenshtein distance of two strings.
    * See https://en.wikipedia.org/wiki/Levenshtein_distance.
-   * Based off https://gist.github.com/andrei-m/982927 (for using the faster dynamic programming
-   * version).
+   * Based off https://gist.github.com/andrei-m/982927.
    *
    * @param a String a.
    * @param b String b.

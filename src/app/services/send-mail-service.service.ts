@@ -11,6 +11,6 @@ export class SendMailServiceService {
   constructor(private http: HttpClient) { }
 
   sendEmail(obj): Observable<Iinfo> {
-    return this.http.post<Iinfo>('http://localhost:3000/sendFormData', obj);
+    return this.http.post<Iinfo>('http://localhost:5000/contact', obj);
   }
 }

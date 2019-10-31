@@ -3,10 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { paths } from './app-paths';
-import {PathResolveService} from './services/path-resolve.service';
-import {NotFoundComponent} from './not-found/not-found.component';
-import {ContactSuccessComponent} from './contact-success/contact-success.component';
-import {ContactFailureComponent} from './contact-failure/contact-failure.component';
+import { PathResolveService } from './services/path-resolve.service';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { ContactSuccessComponent } from './contact-success/contact-success.component';
+import { ContactFailureComponent } from './contact-failure/contact-failure.component';
 
 
 const routes: Routes = [{path: paths.home, component: HomeComponent},
