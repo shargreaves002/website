@@ -23,9 +23,9 @@ export class ContactComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   // TODO: make a back end to email this data to me
-  processForm = async (e) => {
-    e.preventDefault();
-    await axios.post('/contact', {
+  processForm = async () => {
+    // e.preventDefault();
+    await axios.post('https://fierce-sands-07111.herokuapp.com/contact', {
       firstName: 'Fred',
       lastName: 'Flintstone'
     })
