@@ -42,10 +42,16 @@ app.post('/api/contact', (req, res) => {
   // create reusable transporter object using the default SMTP transport
   console.log("post request received");
   let transporter = nodemailer.createTransport({
-    service: "Gmail",
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
     auth: {
+      type: 'OAuth2',
       user: process.env.GMAIL_USER,
-      pass:process.env.GMAIL_PASS
+      clientId: '000000000000-xxx0.apps.googleusercontent.com',
+      clientSecret: 'XxxxxXXxX0xxxxxxxx0XXxX0',
+      refreshToken: '1/XXxXxsss-xxxXXXXXxXxx0XXXxxXXx0x00xxx',
+      accessToken: 'ya29.Xx_XX0xxxxx-xX0X0XxXXxXxXXXxX0x'
     }
   });
 
