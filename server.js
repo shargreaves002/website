@@ -4,6 +4,7 @@ const nodemailer = require('nodemailer');
 const app = express();
 const projectName = "website";
 const bodyParser = require('body-parser');
+const xoauth2 = require('xoauth2');
 // const GMAIL_USER = process.env.GMAIL_USER;
 // const GMAIL_PASS = process.env.GMAIL_PASS;
 // const GMAIL_USER = 'fury157@gmail.com';
@@ -42,27 +43,21 @@ app.post('/api/contact', (req, res) => {
   // create reusable transporter object using the default SMTP transport
   console.log("post request received");
   let transporter = nodemailer.createTransport({
-    /*host: 'smtp.gmail.com',
+    host: 'smtp.gmail.com',
     port: 465,
     secure: true,
     auth: {
       type: 'OAuth2',
       user: process.env.GMAIL_USER,
       clientId: '49997474895-qnblhjf6t3kba3fsidfc0pteq46g9n84.apps.googleusercontent.com',
-      clientSecret: 'RmCYvU7vhuCD1hUOaSLZoeYx'
-    }*/
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false,
-    auth: {
-      user: process.env.GMAIL_USER,
-      pass: process.env.GMAIL_PASS
+      clientSecret: 'RmCYvU7vhuCD1hUOaSLZoeYx',
+      refreshToken: '1//04P6OSRX5bBfRCgYIARAAGAQSNwF-L9IrL_0rFhGpCHRIjL8vb1RZNyHR1vCH9JScTtInjIn_-_vBslPPH4_bq3fMWvY4twFIIJQ'
     }
   });
 
   // setup email data
   let mailOptions = {
-    from: 'Someone@test.com', // This is ignored by Gmail
+    from: process.env.GMAIL_USER, // This is ignored by Gmail
     to: 'sarahhargreaves10@gmail.com', // list of receivers
     subject: 'You got a new message from the website!', // Subject line
     // text: req.body.name + '(' + req.body.email + ') says: ' + req.body.message // plain text body
