@@ -23,7 +23,7 @@ export class ContactComponent implements OnInit {
   processForm = async (e) => {
     console.log('post request sending');
     e.preventDefault();
-    await axios.post('/contact', {
+    await axios.post('/api/contact', {
       name: e.name,
       email: e.email,
       message: e.message

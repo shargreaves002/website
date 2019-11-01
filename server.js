@@ -19,11 +19,11 @@ app.all('*', function (req, res, next) {
   next();
 });
 
-/*app.use((request, response, next) => {
+app.use((request, response, next) => {
   response.header("Access-Control-Allow-Origin", "*");
   response.header("Access-Control-Allow-Headers", "Content-Type");
   next();
-});*/
+});
 
 app.set('port', process.env.PORT || 5000);
 
@@ -38,7 +38,7 @@ app.listen(app.get('port'), function () {
 
 // catch a post request made to the contact form, use it to send an email
 
-app.post('/contact', (req, res) => {
+app.post('/api/contact', (req, res) => {
   // create reusable transporter object using the default SMTP transport
   console.log("post request received");
   let transporter = nodemailer.createTransport('SMTP',{
