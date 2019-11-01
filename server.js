@@ -13,17 +13,17 @@ app.use(bodyParser.json());
 app.use(express.static('dist/' + projectName));
 app.use(bodyParser.urlencoded({extended: false}));
 
-/*app.all('*', function (req, res, next) {
+app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
-});*/
+});
 
-app.use((request, response, next) => {
+/*app.use((request, response, next) => {
   response.header("Access-Control-Allow-Origin", "*");
   response.header("Access-Control-Allow-Headers", "Content-Type");
   next();
-});
+});*/
 
 app.set('port', process.env.PORT || 5000);
 
@@ -37,18 +37,15 @@ app.listen(app.get('port'), function () {
 });
 
 // catch a post request made to the contact form, use it to send an email
-app.post('https://fierce-sands-07111.herokuapp.com/contact', (req, res) => {
+
+app.post('/contact', (req, res) => {
   // create reusable transporter object using the default SMTP transport
   console.log("post request received");
-  let transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
-    port: 587,
+  let transporter = nodemailer.createTransport('SMTP',{
+    service: "Gmail",
     auth: {
-      user: 'fury157@gmail.com',
-      pass:'momlovesme'
-    },
-    tls: {
-      rejectUnauthorized: false
+      user: process.env.GMAIL_USER,
+      pass:process.env.GMAIL_PASS
     }
   });
 
@@ -56,17 +53,20 @@ app.post('https://fierce-sands-07111.herokuapp.com/contact', (req, res) => {
   let mailOptions = {
     from: 'Someone@test.com', // This is ignored by Gmail
     to: 'sarahhargreaves10@gmail.com', // list of receivers
-    subject: 'This is a test', // Subject line
-    text: '${req.body.name} (${req.body.email}) says: ${req.body.message}' // plain text body
+    subject: 'This is a test.', // Subject line
+    // text: req.body.name + '(' + req.body.email + ') says: ' + req.body.message // plain text body
+    text: 'This is a test.'
   };
 
   // send mail with the transport object
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      res.render('src/app/contact-failure') // Show a page indicating failure
+      // res.render('src/app/contact-failure') // Show a page indicating failure
+      console.log(error);
     }
     else {
-      res.render('src/app/contact-success') // Show a page indicating success
+      // res.render('src/app/contact-success') // Show a page indicating success
+      console.log(info);
     }
   });
 });

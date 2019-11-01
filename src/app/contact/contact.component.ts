@@ -13,9 +13,6 @@ import { AxiosInstance } from 'axios';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
-  name: string;
-  email: string;
-  message: string;
 
   ngOnInit() {
   }
@@ -26,10 +23,10 @@ export class ContactComponent implements OnInit {
   processForm = async (e) => {
     console.log('post request sending');
     e.preventDefault();
-    await axios.post('https://fierce-sands-07111.herokuapp.com/contact', {
-      name: 'Fred',
-      email: 'test@test.com',
-      message: 'This was a test.'
+    await axios.post('/contact', {
+      name: e.name,
+      email: e.email,
+      message: e.message
     })
       .then(response => {
         console.log(response);
