@@ -47,12 +47,10 @@ app.post('/api/contact', (req, res) => {
     port: 465,
     secure: true,
     auth: {
-      xoauth2: xoauth2.createXOAuth2Generator({
-        user: process.env.GMAIL_USER,
-        clientId: '49997474895-qnblhjf6t3kba3fsidfc0pteq46g9n84.apps.googleusercontent.com',
-        clientSecret: 'RmCYvU7vhuCD1hUOaSLZoeYx',
-        refreshToken: '1//04P6OSRX5bBfRCgYIARAAGAQSNwF-L9IrL_0rFhGpCHRIjL8vb1RZNyHR1vCH9JScTtInjIn_-_vBslPPH4_bq3fMWvY4twFIIJQ'
-      })
+      user: process.env.GMAIL_USER,
+      clientId: '49997474895-qnblhjf6t3kba3fsidfc0pteq46g9n84.apps.googleusercontent.com',
+      clientSecret: 'RmCYvU7vhuCD1hUOaSLZoeYx',
+      refreshToken: '1//04P6OSRX5bBfRCgYIARAAGAQSNwF-L9IrL_0rFhGpCHRIjL8vb1RZNyHR1vCH9JScTtInjIn_-_vBslPPH4_bq3fMWvY4twFIIJQ'
     }
   });
 
@@ -61,18 +59,17 @@ app.post('/api/contact', (req, res) => {
     from: process.env.GMAIL_USER, // This is ignored by Gmail
     to: 'sarahhargreaves10@gmail.com', // list of receivers
     subject: 'You got a new message from the website!', // Subject line
-    // text: req.body.name + '(' + req.body.email + ') says: ' + req.body.message // plain text body
-    text: 'This is a test.'
+    text: req.body.name + '(' + req.body.email + ') says: ' + req.body.message // plain text body
   };
 
   // send mail with the transport object
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      // res.render('src/app/contact-failure') // Show a page indicating failure
+      res.render('src/app/contact-failure'); // Show a page indicating failure
       console.log(error);
     }
     else {
-      // res.render('src/app/contact-success') // Show a page indicating success
+      res.render('src/app/contact-success'); // Show a page indicating success
       console.log(info);
     }
   });
