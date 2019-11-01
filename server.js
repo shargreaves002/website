@@ -41,7 +41,7 @@ app.listen(app.get('port'), function () {
 
 app.post('/api/contact', (req, res) => {
   // create reusable transporter object using the default SMTP transport
-  console.log("post request received");
+  // req.setTimeout(500000);
   let transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -65,11 +65,11 @@ app.post('/api/contact', (req, res) => {
   // send mail with the transport object
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      res.render('src/app/contact-failure'); // Show a page indicating failure
+      // res.render('src/app/contact-failure'); // Show a page indicating failure
       console.log(error);
     }
     else {
-      res.render('src/app/contact-success'); // Show a page indicating success
+      // res.render('src/app/contact-success'); // Show a page indicating success
       console.log(info);
     }
   });
