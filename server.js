@@ -48,10 +48,8 @@ app.post('/api/contact', (req, res) => {
     auth: {
       type: 'OAuth2',
       user: process.env.GMAIL_USER,
-      clientId: '000000000000-xxx0.apps.googleusercontent.com',
-      clientSecret: 'XxxxxXXxX0xxxxxxxx0XXxX0',
-      refreshToken: '1/XXxXxsss-xxxXXXXXxXxx0XXXxxXXx0x00xxx',
-      accessToken: 'ya29.Xx_XX0xxxxx-xX0X0XxXXxXxXXXxX0x'
+      clientId: '49997474895-qnblhjf6t3kba3fsidfc0pteq46g9n84.apps.googleusercontent.com',
+      clientSecret: 'RmCYvU7vhuCD1hUOaSLZoeYx'
     }
   });
 
