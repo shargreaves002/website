@@ -17,7 +17,7 @@ export class ContactComponent implements OnInit {
   ngOnInit() {
   }
 
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
   // TODO: make a back end to email this data to me
   processForm = async (e) => {
