@@ -41,7 +41,7 @@ app.listen(app.get('port'), function () {
 app.post('/api/contact', (req, res) => {
   // create reusable transporter object using the default SMTP transport
   console.log("post request received");
-  let transporter = nodemailer.createTransport('SMTP',{
+  let transporter = nodemailer.createTransport({
     service: "Gmail",
     auth: {
       user: process.env.GMAIL_USER,
@@ -53,7 +53,7 @@ app.post('/api/contact', (req, res) => {
   let mailOptions = {
     from: 'Someone@test.com', // This is ignored by Gmail
     to: 'sarahhargreaves10@gmail.com', // list of receivers
-    subject: 'This is a test.', // Subject line
+    subject: 'You got a new message from the website!', // Subject line
     // text: req.body.name + '(' + req.body.email + ') says: ' + req.body.message // plain text body
     text: 'This is a test.'
   };
