@@ -47,6 +47,7 @@ app.post('/api/contact', (req, res) => {
     port: 465,
     secure: true,
     auth: {
+      type: 'OAuth2',
       user: process.env.GMAIL_USER,
       clientId: '49997474895-qnblhjf6t3kba3fsidfc0pteq46g9n84.apps.googleusercontent.com',
       clientSecret: 'RmCYvU7vhuCD1hUOaSLZoeYx',
