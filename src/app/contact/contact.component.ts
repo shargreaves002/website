@@ -23,12 +23,13 @@ export class ContactComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   // TODO: make a back end to email this data to me
-  processForm = async () => {
+  processForm = async (e) => {
     console.log('post request sending');
-    // e.preventDefault();
-    await axios.post('/contact', {
-      firstName: 'Fred',
-      lastName: 'Flintstone'
+    e.preventDefault();
+    await axios.post('localhost:5000/contact', {
+      name: 'Fred',
+      email: 'test@test.com',
+      message: 'This was a test.'
     })
       .then(response => {
         console.log(response);

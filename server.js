@@ -35,40 +35,9 @@ app.get('*',function (req, res) {
 app.listen(app.get('port'), function () {
   console.log("Express server listening on port " + app.get('port'));
 });
-/*
-// POST route from contact form
-app.post('/contact', (req, res) => {
-  // Instantiate the SMTP server
-  const smtpTrans = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
-    auth: {
-      user: 'fury157@gmail.com',
-      pass: 'momlovesme'
-    }
-  });
 
-  // Specify what the email will look like
-  const mailOpts = {
-    from: 'Your sender info here', // This is ignored by Gmail
-    to: 'fury157@gmail.com',
-    subject: 'New message from website',
-    text: `${req.body.name} (${req.body.email}) says: ${req.body.message}`
-  };
-
-  // Attempt to send the email
-  smtpTrans.sendMail(mailOpts, (error, res) => {
-    if (error) {
-      res.render('src/app/contact-failure') // Show a page indicating failure
-    }
-    else {
-      res.render('src/app/contact-success') // Show a page indicating success
-    }
-  })
-});*/
-
-app.post('/contact', (req, res) => {
+// catch a post request made to the contact form, use it to send an email
+app.post('localhost:5000/contact', (req, res) => {
   // create reusable transporter object using the default SMTP transport
   console.log("post request received");
   let transporter = nodemailer.createTransport({
@@ -76,23 +45,22 @@ app.post('/contact', (req, res) => {
     port: 587,
     auth: {
       user: 'fury157@gmail.com',
-      pass: 'momlovesme'
+      pass:'momlovesme'
     },
     tls: {
       rejectUnauthorized: false
     }
   });
 
-  // setup email data with unicode symbols
+  // setup email data
   let mailOptions = {
-    from: 'Someone@test.com', // sender address
+    from: 'Someone@test.com', // This is ignored by Gmail
     to: 'sarahhargreaves10@gmail.com', // list of receivers
-    subject: 'A Postcard For You!', // Subject line
-    text: 'Postcard', // plain text body
-    html: '<b>From my app</b>' // html body
+    subject: 'This is a test', // Subject line
+    text: '${req.body.name} (${req.body.email}) says: ${req.body.message}' // plain text body
   };
 
-  // send mail with defined transport object
+  // send mail with the transport object
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
       res.render('src/app/contact-failure') // Show a page indicating failure
