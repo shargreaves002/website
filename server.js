@@ -42,19 +42,22 @@ app.post('/api/contact', (req, res) => {
   // create reusable transporter object using the default SMTP transport
   console.log("post request received");
   let transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
+    /*host: 'smtp.gmail.com',
     port: 465,
-    /*secure: true,
+    secure: true,
     auth: {
       type: 'OAuth2',
       user: process.env.GMAIL_USER,
       clientId: '49997474895-qnblhjf6t3kba3fsidfc0pteq46g9n84.apps.googleusercontent.com',
       clientSecret: 'RmCYvU7vhuCD1hUOaSLZoeYx'
     }*/
-    ssl: true,
-    use_authentication: true,
-    user: process.env.GMAIL_USER,
-    pass: process.env.GMAIL_PASS
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false,
+    auth: {
+      user: process.env.GMAIL_USER,
+      pass: process.env.GMAIL_PASS
+    }
   });
 
   // setup email data
