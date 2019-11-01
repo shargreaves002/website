@@ -26,7 +26,7 @@ export class ContactComponent implements OnInit {
   processForm = async (e) => {
     console.log('post request sending');
     e.preventDefault();
-    await axios.post('localhost:5000/contact', {
+    await axios.post('https://fierce-sands-07111.herokuapp.com/contact', {
       name: 'Fred',
       email: 'test@test.com',
       message: 'This was a test.'

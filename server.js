@@ -37,7 +37,7 @@ app.listen(app.get('port'), function () {
 });
 
 // catch a post request made to the contact form, use it to send an email
-app.post('localhost:5000/contact', (req, res) => {
+app.post('https://fierce-sands-07111.herokuapp.com/contact', (req, res) => {
   // create reusable transporter object using the default SMTP transport
   console.log("post request received");
   let transporter = nodemailer.createTransport({
