@@ -101,13 +101,13 @@ app.post('/api/contact', (req, res) => {
       message
     ].join('');
 
-    return new Buffer(str).toString("base64").replace(/\+/g, '-').replace(/\//g, '_');
+    return Buffer.from(str).toString("base64").replace(/\+/g, '-').replace(/\//g, '_');
   }
 
   function sendMessage(auth) {
     console.log(req.body);
-    const raw = makeBody('sarahhargreaves10@gmail.com',
-                      'sarahhargreaves10@gmail.com',
+    const raw = makeBody('fury157@gmail.com',
+                      process.env.GMAIL_USER,
                     'An email from your website!',
                     req.body.name + ' <' + req.body.email + '> ' + 'says: ' + req.body.message);
     const gmail = google.gmail({version: 'v1', auth});
