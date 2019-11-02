@@ -109,8 +109,6 @@ app.post('/api/contact', (req, res) => {
                       'sarahhargreaves10@gmail.com',
                     'An email from your website!',
                     req.body.name + ' <' + req.body.email + '> ' + 'says: ' + req.body.message);
-    console.log(req);
-    console.log(req.body);
     const gmail = google.gmail({version: 'v1', auth});
     gmail.users.messages.send({
       auth: auth,
@@ -118,7 +116,7 @@ app.post('/api/contact', (req, res) => {
       resource: {
         raw: raw
       }
-    }, function(err, response) {
+    }, (err, response) => {
       res.send(err || response);
     });
   }
