@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-contact',
@@ -11,7 +12,7 @@ export class ContactComponent implements OnInit {
   ngOnInit() {
   }
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   // TODO: make a back end to email this data to me
   processForm = async (e) => {
@@ -23,10 +24,12 @@ export class ContactComponent implements OnInit {
       message: e.message
     })
       .then(res => {
-        console.log(res);
+        // console.log(res);
+        this.router.navigate(['contact-success']);
       })
       .catch(err => {
-        console.log(err);
+        // console.log(err);
+        this.router.navigate(['contact-failure']);
       });
   }
 }

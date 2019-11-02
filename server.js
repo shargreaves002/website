@@ -8,9 +8,7 @@ const fs = require('fs');
 const readline = require('readline');
 
 app.use(express.json());
-// app.use(bodyParser.json());
 app.use(express.static('dist/' + projectName));
-// app.use(bodyParser.urlencoded({extended: false}));
 
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -111,6 +109,8 @@ app.post('/api/contact', (req, res) => {
                       'sarahhargreaves10@gmail.com',
                     'An email from your website!',
                     req.body.name + ' <' + req.body.email + '> ' + 'says: ' + req.body.message);
+    console.log(req);
+    console.log(req.body);
     const gmail = google.gmail({version: 'v1', auth});
     gmail.users.messages.send({
       auth: auth,
