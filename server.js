@@ -5,10 +5,15 @@ const app = express();
 const projectName = "website";
 const bodyParser = require('body-parser');
 const xoauth2 = require('xoauth2');
+const { google } = require("googleapis");
+const OAuth2 = google.auth.OAuth2;
+const oauth2Client = new OAuth2(
+  '49997474895-qnblhjf6t3kba3fsidfc0pteq46g9n84.apps.googleusercontent.com', // Client ID
+  'RmCYvU7vhuCD1hUOaSLZoeYx', // Client Secret
+  "https://developers.google.com/oauthplayground" // Redirect URL
+);
 // const GMAIL_USER = process.env.GMAIL_USER;
 // const GMAIL_PASS = process.env.GMAIL_PASS;
-// const GMAIL_USER = 'fury157@gmail.com';
-// const GMAIL_PASS = 'momlovesme';
 
 app.use(bodyParser.json());
 app.use(express.static('dist/' + projectName));
@@ -42,6 +47,12 @@ app.listen(app.get('port'), function () {
 app.post('/api/contact', (req, res) => {
   // create reusable transporter object using the default SMTP transport
   // req.setTimeout(500000);
+
+  oauth2Client.setCredentials({
+    refresh_token: '1//04WikNtQN-u0NCgYIARAAGAQSNwF-L9IrjyqKUS979fAOIfY7oQcYV14Yg624RjDAL59ZqR5iWo3y0SKrjVpwYLrd2UsUDoJtL8c'
+  });
+  const accessToken = oauth2Client.getAccessToken();
+
   let transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -51,7 +62,8 @@ app.post('/api/contact', (req, res) => {
       user: process.env.GMAIL_USER,
       clientId: '49997474895-qnblhjf6t3kba3fsidfc0pteq46g9n84.apps.googleusercontent.com',
       clientSecret: 'RmCYvU7vhuCD1hUOaSLZoeYx',
-      refreshToken: '1//04P6OSRX5bBfRCgYIARAAGAQSNwF-L9IrL_0rFhGpCHRIjL8vb1RZNyHR1vCH9JScTtInjIn_-_vBslPPH4_bq3fMWvY4twFIIJQ'
+      refreshToken: '1//04WikNtQN-u0NCgYIARAAGAQSNwF-L9IrjyqKUS979fAOIfY7oQcYV14Yg624RjDAL59ZqR5iWo3y0SKrjVpwYLrd2UsUDoJtL8c'
+      accessToken: accessToken
     }
   });
 
@@ -73,5 +85,7 @@ app.post('/api/contact', (req, res) => {
       // res.render('src/app/contact-success'); // Show a page indicating success
       console.log(info);
     }
+
+    transporter.close();
   });
 });
