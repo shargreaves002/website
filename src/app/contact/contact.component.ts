@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
 import {Router} from '@angular/router';
-import {$} from 'protractor';
+declare var $: any;
 
 @Component({
   selector: 'app-contact',
