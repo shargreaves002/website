@@ -106,14 +106,14 @@ app.post('/api/contact', (req, res) => {
 
   function sendMessage(auth) {
     console.log(req.body);
-    const raw = makeBody(process.env.GMAIL_USER,
-                      process.env.GMAIL_USER,
+    const raw = makeBody('sarahhargreaves10@gmail.com',
+                      'sarahhargreaves10@gmail.com',
                     req.body.name + ' would like to contact you!',
                   '<' + req.body.email + '> says: ' + req.body.message);
     const gmail = google.gmail({version: 'v1', auth});
     gmail.users.messages.send({
       auth: auth,
-      userId: process.env.GMAIL_USER,
+      userId: 'me',
       resource: {
         raw: raw
       }
