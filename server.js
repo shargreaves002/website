@@ -105,6 +105,7 @@ app.post('/api/contact', (req, res) => {
   }
 
   function sendMessage(auth) {
+    console.log(req.body);
     const raw = makeBody('sarahhargreaves10@gmail.com',
                       'sarahhargreaves10@gmail.com',
                     'An email from your website!',

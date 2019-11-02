@@ -18,11 +18,12 @@ export class ContactComponent implements OnInit {
   processForm = async (e) => {
     console.log('post request sending');
     e.preventDefault();
-    const data = JSON.stringify({
+    const data = {
       name: e.name,
       email: e.email,
       message: e.message
-    });
+    };
+
     await axios.post('/api/contact', data, {
       headers: {
         'Content-Type': 'application/json',
