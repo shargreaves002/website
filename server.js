@@ -7,9 +7,10 @@ const { google } = require("googleapis");
 const fs = require('fs');
 const readline = require('readline');
 
-app.use(bodyParser.json());
+app.use(express.json());
+// app.use(bodyParser.json());
 app.use(express.static('dist/' + projectName));
-app.use(bodyParser.urlencoded({extended: false}));
+// app.use(bodyParser.urlencoded({extended: false}));
 
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
@@ -118,7 +119,7 @@ app.post('/api/contact', (req, res) => {
         raw: raw
       }
     }, function(err, response) {
-      console.log(err || response);
+      res.send(err || response);
     });
   }
 });

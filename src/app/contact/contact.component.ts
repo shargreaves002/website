@@ -22,11 +22,11 @@ export class ContactComponent implements OnInit {
       email: e.email,
       message: e.message
     })
-      .then(response => {
-        console.log(response);
+      .then(res => {
+        console.log(res);
       })
-      .catch(error => {
-        console.log(error);
+      .catch(err => {
+        console.log(err);
       });
   }
 }
