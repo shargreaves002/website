@@ -62,7 +62,7 @@ app.post('/api/contact', (req, res) => {
       user: process.env.GMAIL_USER,
       clientId: '49997474895-qnblhjf6t3kba3fsidfc0pteq46g9n84.apps.googleusercontent.com',
       clientSecret: 'RmCYvU7vhuCD1hUOaSLZoeYx',
-      refreshToken: '1//04WikNtQN-u0NCgYIARAAGAQSNwF-L9IrjyqKUS979fAOIfY7oQcYV14Yg624RjDAL59ZqR5iWo3y0SKrjVpwYLrd2UsUDoJtL8c'
+      refreshToken: '1//04WikNtQN-u0NCgYIARAAGAQSNwF-L9IrjyqKUS979fAOIfY7oQcYV14Yg624RjDAL59ZqR5iWo3y0SKrjVpwYLrd2UsUDoJtL8c',
       accessToken: accessToken
     }
   });
