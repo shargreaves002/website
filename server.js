@@ -54,22 +54,20 @@ app.post('/api/contact', (req, res) => {
   const accessToken = oauth2Client.getAccessToken();
 
   let transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 465,
-    secure: true,
+    service: 'gmail',
     auth: {
       type: 'OAuth2',
-      user: process.env.GMAIL_USER,
-      clientId: '49997474895-qnblhjf6t3kba3fsidfc0pteq46g9n84.apps.googleusercontent.com',
+      user: 'sarahhargreaves10@gmail.com',
+      /*clientId: '49997474895-qnblhjf6t3kba3fsidfc0pteq46g9n84.apps.googleusercontent.com',
       clientSecret: 'RmCYvU7vhuCD1hUOaSLZoeYx',
-      refreshToken: '1//04WikNtQN-u0NCgYIARAAGAQSNwF-L9IrjyqKUS979fAOIfY7oQcYV14Yg624RjDAL59ZqR5iWo3y0SKrjVpwYLrd2UsUDoJtL8c',
+      refreshToken: '1//04WikNtQN-u0NCgYIARAAGAQSNwF-L9IrjyqKUS979fAOIfY7oQcYV14Yg624RjDAL59ZqR5iWo3y0SKrjVpwYLrd2UsUDoJtL8c',*/
       accessToken: accessToken
     }
   });
 
   // setup email data
   let mailOptions = {
-    from: process.env.GMAIL_USER, // This is ignored by Gmail
+    from: 'sarahhargreaves10@gmail.com', // This is ignored by Gmail
     to: 'sarahhargreaves10@gmail.com', // list of receivers
     subject: 'You got a new message from the website!', // Subject line
     text: req.body.name + '(' + req.body.email + ') says: ' + req.body.message // plain text body
