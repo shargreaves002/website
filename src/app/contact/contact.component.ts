@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
 import {Router} from '@angular/router';
+import {$} from 'protractor';
 
 @Component({
   selector: 'app-contact',
@@ -9,20 +10,24 @@ import {Router} from '@angular/router';
 })
 export class ContactComponent implements OnInit {
 
+  constructor(private router: Router) {}
+  name: any;
+  message: any;
+  email: any;
+
   ngOnInit() {
   }
 
-  constructor(private router: Router) {}
-
   // TODO: make a back end to email this data to me
-  processForm = async (e) => {
-    console.log('post request sending');
-    e.preventDefault();
-    const data = {
-      name: e.name,
-      email: e.email,
-      message: e.message
-    };
+  processForm = async () => {
+    this.name = String($('#name').val());
+    this.email = String($('#email').val());
+    this.message = String($('#message').val());
+    const data = JSON.stringify({
+      name: this.name,
+      email: this.email,
+      message: this.message
+    });
 
     await axios.post('/api/contact', data, {
       headers: {
