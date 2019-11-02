@@ -8,11 +8,11 @@ const xoauth2 = require('xoauth2');
 const { google } = require("googleapis");
 const fs = require('fs');
 const readline = require('readline');
-const oauth2Client = new OAuth2(
+/*const oauth2Client = new OAuth2(
   '49997474895-qnblhjf6t3kba3fsidfc0pteq46g9n84.apps.googleusercontent.com', // Client ID
   'RmCYvU7vhuCD1hUOaSLZoeYx', // Client Secret
   "https://developers.google.com/oauthplayground" // Redirect URL
-);
+);*/
 // const GMAIL_USER = process.env.GMAIL_USER;
 // const GMAIL_PASS = process.env.GMAIL_PASS;
 
