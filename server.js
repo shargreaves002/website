@@ -1,9 +1,9 @@
 require('dotenv').config();
+require('zone.js/dist/zone-node');
 const renderModuleFactory = require('@angular/platform-server');
 const { AppServerModuleNgFactory } = require('./dist/website-server/main');
 const express = require('express');
 const app = express();
-const projectName = "website";
 const { google } = require("googleapis");
 const fs = require('fs');
 const indexHtml = fs.readFileSync(__dirname + '/dist/website/index.html', 'utf-8').toString();
