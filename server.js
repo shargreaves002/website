@@ -6,11 +6,11 @@ const app = express();
 const projectName = "website";
 const { google } = require("googleapis");
 const fs = require('fs');
-const indexHtml = fs.readFileSync(__dirname + '/dist/index.html', 'utf-8').toString();
+const indexHtml = fs.readFileSync(__dirname + '/dist/website/index.html', 'utf-8').toString();
 // const readline = require('readline');
 
 app.use(express.json());
-app.use(express.static('dist/' + projectName));
+// app.use(express.static('dist/' + projectName));
 
 app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
