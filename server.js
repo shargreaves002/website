@@ -1,9 +1,12 @@
 require('dotenv').config();
+const renderModuleFactory = require('@angular/platform-server');
+const { AppServerModuleNgFactory } = require('./dist/website-server/main');
 const express = require('express');
 const app = express();
 const projectName = "website";
 const { google } = require("googleapis");
 const fs = require('fs');
+const indexHtml = fs.readFileSync(__dirname + '/dist/index.html', 'utf-8').toString();
 // const readline = require('readline');
 
 app.use(express.json());
@@ -23,9 +26,24 @@ app.use((request, response, next) => {
 
 app.set('port', process.env.PORT || 5000);
 
-app.get('*',function (req, res) {
+/*app.get('*',function (req, res) {
   // this tells the server to redirect all url calls to the index where our angular router will do the work
   res.sendFile(__dirname + '/src/index.html');
+});*/
+
+app.route('*').get((req, res) => {
+
+  renderModuleFactory.renderModuleFactory(AppServerModuleNgFactory, {
+    document: indexHtml,
+    url: req.url
+  })
+    .then(html => {
+      res.status(200).send(html);
+    })
+    .catch(err => {
+      console.log(err);
+      res.sendStatus(500);
+    });
 });
 
 app.listen(app.get('port'), function () {
@@ -56,31 +74,6 @@ app.post('/api/contact', (req, res) => {
     });
   }
 
-
-  /*function getNewToken(oAuth2Client, callback) {
-      const authUrl = oAuth2Client.generateAuthUrl({
-        access_type: 'offline',
-        scope: SCOPES,
-      });
-      console.log('Authorize this app by visiting this url:', authUrl);
-      const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout,
-      });
-      rl.question('Enter the code from that page here: ', (code) => {
-        rl.close();
-        oAuth2Client.getToken(code, (err, token) => {
-          if (err) return console.error('Error retrieving access token', err);
-          oAuth2Client.setCredentials(token);
-          // Store the token to disk for later program executions
-          fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
-            if (err) return console.error(err);
-            console.log('Token stored to', TOKEN_PATH);
-          });
-          callback(oAuth2Client);
-        });
-      });
-    }*/
   function makeBody(to, from, subject, message) {
     const str = ["Content-Type: text/plain; charset=\"UTF-8\"\n",
       "MIME-Version: 1.0\n",

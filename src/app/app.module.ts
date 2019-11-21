@@ -20,7 +20,7 @@ import { ContactSuccessComponent } from './contact-success/contact-success.compo
     ContactSuccessComponent
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule
