@@ -1,39 +1,42 @@
-<div style="text-align: center;">
-<form (ngSubmit)="processForm()">
-
-  Your name:
-  <div>
-    <label>
-      <input type="text" id="name" name="name" class="form-control" placeholder="Your Name" [(ngModel)]="name" required minlength="3" #nameInput="ngModel">
-    </label>
-    <div class="help is-error" *ngIf="nameInput.invalid && nameInput.dirty">
-      Name is required and needs to be at least 3 characters long.
-    </div>
+<div class="card m-3">
+  <h5 class="card-header text-center">Contact me below!</h5>
+  <div class="card-body">
+    <form name="form" (ngSubmit)="f.form.valid && onSubmit(f)" #f="ngForm">
+      <div class="form-group form-row">
+        <div class="form-group col-sm">
+          <label for="name">Your Name:</label>
+          <input type="text" id="name" name="name" class="form-control" [(ngModel)]="contactForm && contactForm.name" #name="ngModel" [ngClass]="{ 'is-invalid': f.submitted && name.invalid }" required>
+          <div *ngIf="f.submitted && name.invalid" class="invalid-feedback">
+            <div *ngIf="name.errors.required">Your name is required</div>
+          </div>
+        </div>
+        <div class="form-group col-sm">
+          <label for="email">Your Email:</label>
+          <input type="email" id="email" name="email" class="form-control" [(ngModel)]="contactForm && contactForm.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email>
+          <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+            <div *ngIf="email.errors.required">Email is required</div>
+            <div *ngIf="email.errors.email">Email must be a valid email address</div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group form-row">
+        <div class="form-group col">
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" rows="6" width="100%" class="form-control" placeholder="What's on your mind?" [(ngModel)]="contactForm && contactForm.message" required #message="ngModel"></textarea>
+          <div *ngIf="f.submitted && message.invalid" class="invalid-feedback">
+            <div *ngIf="message.errors.required">Your message is required.</div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center">
+        <button class="btn btn-primary" type="submit" value="Submit">Send Message</button>
+      </div>
+      <br />
+      <div class="text-center">
+        {{response}}
+      </div>
+      <br />
+    </form>
   </div>
-
-  Your email:
-  <div>
-    <label>
-      <input type="email" id="email" name="email" class="form-control" placeholder="Your Email" [(ngModel)]="email" required email #emailInput="ngModel">
-    </label>
-    <div class="help is-error" *ngIf="emailInput.invalid && emailInput.dirty">
-      Needs to be a valid email.
-    </div>
-  </div>
-
-  Your message:
-  <div>
-    <label>
-      <textarea id="message" name="message" class="form-control" placeholder="What's on your mind?" [(ngModel)]="message" required #messageInput="ngModel"></textarea>
-    </label>
-    <div class="help is-error" *ngIf="messageInput.invalid && messageInput.dirty">
-      Your message is required.
-    </div>
-  </div>
-  <div >
-  <button type="submit" value="Submit" class="btn btn-primary" [disabled]="nameInput.invalid || emailInput.invalid || messageInput.invalid">Submit</button>
-  </div>
-
-</form>
 </div>
 <router-outlet></router-outlet>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import axios from 'axios';
-import {Router} from '@angular/router';
-declare var $: any;
+import { throwError } from 'rxjs';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-contact',
@@ -10,23 +10,17 @@ declare var $: any;
 })
 export class ContactComponent implements OnInit {
 
-  constructor(private router: Router) {}
-  name: any;
-  message: any;
-  email: any;
+  contactForm: any = {};
+  response: string;
 
   ngOnInit() {
   }
 
-  // TODO: make a back end to email this data to me
-  processForm = async () => {
-    this.name = String($('#name').val());
-    this.email = String($('#email').val());
-    this.message = String($('#message').val());
+  onSubmit = async (f: NgForm) => {
     const data = JSON.stringify({
-      name: this.name,
-      email: this.email,
-      message: this.message
+      name: this.contactForm.name,
+      email: this.contactForm.email,
+      message: this.contactForm.message
     });
 
     await axios.post('/api/contact', data, {
@@ -34,11 +28,13 @@ export class ContactComponent implements OnInit {
         'Content-Type': 'application/json',
       }
     })
-      .then(res => {
-        this.router.navigate(['contact-success']);
+      .then(() => {
+        this.response = 'Thank you for contacting me!';
+        f.resetForm();
       })
       .catch(err => {
-        this.router.navigate(['contact-failure']);
+        this.response = 'Sorry, it looks like there was an error. Please try again later.';
+        throwError(err);
       });
   }
 }
