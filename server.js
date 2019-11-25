@@ -10,9 +10,9 @@ const indexHtml = fs.readFileSync(__dirname + '/dist/website/index.html', 'utf-8
 // const readline = require('readline');
 
 app.use(express.json());
-// app.use(express.static('dist/' + projectName));
+app.use(express.static('dist/website'));
 
-app.all('*', function (req, res, next) {
+/*app.all('*', function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
@@ -22,14 +22,13 @@ app.use((request, response, next) => {
   response.header("Access-Control-Allow-Origin", "*");
   response.header("Access-Control-Allow-Headers", "Content-Type");
   next();
-});
+});*/
 
 app.set('port', process.env.PORT || 5000);
 
-/*app.get('*',function (req, res) {
-  // this tells the server to redirect all url calls to the index where our angular router will do the work
-  res.sendFile(__dirname + '/src/index.html');
-});*/
+app.get('*.*', express.static(__dirname + '/dist', {
+  maxAge: '1y'
+}));
 
 app.route('*').get((req, res) => {
 

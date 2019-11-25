@@ -7,8 +7,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { ContactFailureComponent } from './contact-failure/contact-failure.component';
-import { ContactSuccessComponent } from './contact-success/contact-success.component';
 
 @NgModule({
   declarations: [
@@ -16,8 +14,6 @@ import { ContactSuccessComponent } from './contact-success/contact-success.compo
     HomeComponent,
     ContactComponent,
     NotFoundComponent,
-    ContactFailureComponent,
-    ContactSuccessComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
