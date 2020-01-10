@@ -87,10 +87,10 @@ app.post('/api/contact', (req, res) => {
   }
 
   function sendMessage(auth) {
-    const raw = makeBody('sarahhargreaves10@gmail.com',
-                      'sarahhargreaves10@gmail.com',
+    const raw = makeBody('example@example.com', // email sent to this address
+                      'example@example.com', // sent from this address
                     req.body.name + ' would like to contact you!',
-                  'Please reply to:' + req.body.email + '\n\n\n' + req.body.message);
+                  'Please reply to: ' + req.body.email + '\n\n\n' + req.body.message);
     const gmail = google.gmail({version: 'v1', auth});
     gmail.users.messages.send({
       auth: auth,
