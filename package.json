@@ -34,7 +34,7 @@
     "@angular/platform-server": "~8.2.4",
     "@angular/router": "~8.2.4",
     "@types/gapi": "0.0.39",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "body-parser": "^1.19.0",
     "bootstrap": "^4.3.1",
     "cors": "^2.8.5",
